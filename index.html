@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen py-10 px-4">
+
+  <!-- Logo (tidak bisa diklik) -->
+  <img src="https://files.catbox.moe/ykyevl.jpeg" alt="Logo" class="w-32 h-32 rounded-full mb-6 shadow-md" />
+
+  <!-- Sosial Media Icons -->
+  <div class="flex space-x-4 mb-8">
+    <a href="https://www.youtube.com/@XyrooOFC" target="_blank" title="YouTube">
+      <img src="https://img.icons8.com/fluency/48/youtube-play.png" class="w-10 h-10 hover:scale-110 transition-transform" />
+    </a>
+    <a href="https://t.me/namatelegram" target="_blank" title="Telegram">
+      <img src="https://img.icons8.com/fluency/48/telegram-app.png" class="w-10 h-10 hover:scale-110 transition-transform" />
+    </a>
+    <a href="https://tiktok.com/@namatiktok" target="_blank" title="TikTok">
+      <img src="https://img.icons8.com/fluency/48/tiktok.png" class="w-10 h-10 hover:scale-110 transition-transform" />
+    </a>
+    <a href="https://instagram.com/namaig" target="_blank" title="Instagram">
+      <img src="https://img.icons8.com/fluency/48/instagram-new.png" class="w-10 h-10 hover:scale-110 transition-transform" />
+    </a>
+    <a href="https://t.me/namachannel" target="_blank" title="Channel Telegram">
+      <img src="https://img.icons8.com/fluency/48/comments.png" class="w-10 h-10 hover:scale-110 transition-transform" />
+    </a>
+    <a href="https://wa.me/6281234567890" target="_blank" title="WhatsApp">
+      <img src="https://img.icons8.com/fluency/48/whatsapp.png" class="w-10 h-10 hover:scale-110 transition-transform" />
+    </a>
+  </div>
+
+  <!-- Tombol Pembayaran -->
+  <div class="flex flex-col space-y-4 w-full max-w-xs">
+    <button onclick="showModal('dana')" class="bg-blue-500 text-white py-3 rounded-xl shadow-md hover:bg-blue-600">Bayar via DANA</button>
+    <button onclick="showModal('gopay')" class="bg-cyan-500 text-white py-3 rounded-xl shadow-md hover:bg-cyan-600">Bayar via GoPay</button>
+    <button onclick="showModal('qris')" class="bg-green-500 text-white py-3 rounded-xl shadow-md hover:bg-green-600">Bayar via QRIS</button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-xl p-6 w-80 text-center relative shadow-lg">
+      <h2 class="text-xl font-bold mb-4" id="modalTitle">Judul</h2>
+      <div id="modalContent" class="mb-4"></div>
+      <button onclick="closeModal()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Modal Script -->
+  <script>
+    function showModal(type) {
+      const modal = document.getElementById('modal');
+      const title = document.getElementById('modalTitle');
+      const content = document.getElementById('modalContent');
+
+      if (type === 'dana') {
+        title.textContent = 'Pembayaran via DANA';
+        content.innerHTML = `
+          <p class="text-lg font-semibold">Nomor: <span>0859-1066-02352</span></p>
+          <button onclick="copyText('0859106602352')" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded">Salin Nomor</button>
+        `;
+      } else if (type === 'gopay') {
+        title.textContent = 'Pembayaran via GoPay';
+        content.innerHTML = `
+          <p class="text-lg font-semibold">Nomor: <span>0859-1066-02352</span></p>
+          <button onclick="copyText('0859106602352')" class="mt-2 bg-cyan-500 text-white px-3 py-1 rounded">Salin Nomor</button>
+        `;
+      } else if (type === 'qris') {
+        title.textContent = 'Pembayaran via QRIS';
+        content.innerHTML = `
+          <img src="https://via.placeholder.com/200x200.png?text=QRIS" alt="QR Code" class="mx-auto rounded mb-2" />
+          <p class="text-sm text-gray-600">Scan QR untuk membayar</p>
+        `;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+      alert('Nomor disalin: ' + text);
+    }
+  </script>
+
+</body>
+</html>
